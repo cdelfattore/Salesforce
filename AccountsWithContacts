@@ -1,0 +1,18 @@
+<apex:page id="pg" controller="AccountContact">
+    <apex:pageBlock id="pgBlk">
+        <apex:pageBlock >
+            List of accounts and their child contact records. Using simple apex tags with no pagination.
+        </apex:pageBlock>
+        <apex:pageBlockTable title="Accounts and Contacts" id="AccBlkTbl" value="{!accounts}" var="account">
+            <apex:column value="{!account.Name}" width="10%"/>
+            <apex:column width="90%">
+                <apex:pageBlockTable id="ConBlkTbl" value="{!account.contacts}" var="con">
+                    <apex:column value="{!con.Name}" width="20%"/>
+                    <apex:column value="{!con.Title}" width="30%"/>
+                    <apex:column value="{!con.Phone}" width="25%"/>
+                    <apex:column value="{!con.Email}" width="25%"/>
+                </apex:pageBlockTable>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
