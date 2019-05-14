@@ -1,7 +1,9 @@
 <apex:page id="pg" controller="AccountContact">
     <apex:pageBlock id="pgBlk">
         <apex:pageBlock >
-            List of accounts and their child contact records. Using simple apex tags with no pagination.
+            <div>List of accounts and their child contact records. Using simple apex tags with no pagination.</div>
+            <div>The code for the <a href="https://github.com/cdelfattore/Salesforce/blob/master/AccountContact.cls" id="classLink">Apex Class</a>.</div>
+            <div>The code for the <a href="https://github.com/cdelfattore/Salesforce/blob/master/AccountsWithContacts.page" id="pageLink">Visualforce Page</a>.</div>
         </apex:pageBlock>
         <apex:pageBlockTable title="Accounts and Contacts" id="AccBlkTbl" value="{!accounts}" var="account">
             <apex:column value="{!account.Name}" width="10%"/>
