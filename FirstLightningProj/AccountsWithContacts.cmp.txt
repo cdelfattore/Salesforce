@@ -1,0 +1,14 @@
+<aura:component controller="AccountContactAura" implements="flexipage:availableForAllPageTypes" access="global" >
+    <!-- attributes -->
+    <aura:attribute name="accountList" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    
+    <!-- Calls the javascript method in the client side controller -->
+    <aura:handler name="init" value="{!this}" action="{!c.loadAccounts}" />
+    
+    <aura:iteration items="{!v.accountList}" var="acc">
+        <lightning:card>
+            <div>{!acc.Name}</div>
+        </lightning:card>        
+    </aura:iteration>
+</aura:component>
