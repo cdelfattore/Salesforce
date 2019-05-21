@@ -1,0 +1,12 @@
+<apex:page id="pg" standardController="Contact" >
+    <apex:pageBlock id="pgBlk">
+        <apex:pageBlockSection columns="1">
+            <apex:outputText >Contact information has been saved!</apex:outputText>
+            <apex:outputField value="{!Contact.AccountId}" />
+            <apex:outputField value="{!Contact.FirstName}" />        
+            <apex:outputField value="{!Contact.LastName}" />
+            <apex:outputField value="{!Contact.Email}" />
+            <apex:outputField value="{!Contact.BirthDate}" />
+        </apex:pageBlockSection>    
+    </apex:pageBlock>
+</apex:page>
