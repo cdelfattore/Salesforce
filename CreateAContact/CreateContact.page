@@ -1,28 +1,15 @@
-<apex:page standardController="Contact" extensions="AccountListWithCheckBoxes">
+<apex:page standardController="Contact" extensions="CreateContact">
     <apex:form >
-        <apex:pageBlock title="Select an Account">
-            <apex:pageBlockTable value="{!accounts}" var="a">
-                 <apex:column width="3%">
-                    <apex:inputCheckbox value="{!a.isChecked}"/>
-                 </apex:column>
-                 <apex:column value="{!a.acc.Name}" />
-            </apex:pageBlockTable>
-        
-        </apex:pageBlock>
-        
         <apex:pageBlock title="Create a new Contact">        
-        
-        <apex:pageBlockSection columns="2">
-            <apex:inputField value="{!Contact.FirstName}"/>
-            <apex:inputField value="{!Contact.LastName}"/>
-            <apex:inputField value="{!Contact.Email}"/>
-            <apex:inputField value="{!Contact.Birthdate}"/>
-        </apex:pageBlockSection>
-        
-        <apex:pageBlockButtons >
-            <apex:commandButton action="{!save}" value="Save"/>
-        </apex:pageBlockButtons>
-
+            <apex:pageBlockSection columns="2">
+                <apex:inputField value="{!Contact.FirstName}"/>
+                <apex:inputField value="{!Contact.LastName}"/>
+                <apex:inputField value="{!Contact.Email}"/>
+                <apex:inputField value="{!Contact.Birthdate}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!saveCon}" value="Save"/>
+            </apex:pageBlockButtons>
         </apex:pageBlock>
     </apex:form>
 </apex:page>
