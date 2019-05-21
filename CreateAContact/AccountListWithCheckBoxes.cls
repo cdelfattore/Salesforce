@@ -1,20 +1,78 @@
 public class AccountListWithCheckBoxes {
 
-    public Contact con;
-    public AccountListWithCheckBoxes(ApexPages.StandardController sc) {
-        this.con = (Contact)sc.getRecord();
+    public ApexPages.StandardSetController setCon {
+        get {
+            if(setCon == null){
+                setCon = new ApexPages.StandardSetController(Database.getQueryLocator([SELECT Id, Name, BillingPostalCode FROM Account WHERE Name != 'sForce']));
+                setCon.setPageSize(5);
+            }
+            return setCon;
+        }
+        set;
     }
 
-    public List<AccountWrapper> getAccounts(){
-        List<AccountWrapper> accWrapList = new List<AccountWrapper>();
-        List<Account> accList = [select Id, Name, BillingPostalCode FROM Account WHERE Name != 'sForce'];
-
+    public List<AccountWrapper> accounts {
+        get {
+            if(accounts == null){
+                accounts = new List<AccountWrapper>();
+            }
+            return accounts;
+        }
+        
+        set;
+    }
+    
+    public boolean hasPrevious {
+        get {
+            return setCon.getHasPrevious();
+        }
+        set;
+    }
+    
+    public boolean hasNext {
+        get {
+            return setCon.getHasNext();
+        }
+        set;
+    }
+    
+    public Id selectedId {get;set;}
+        
+    public AccountListWithCheckBoxes() {
+        wrapAccounts();
+    }
+    
+    public void previous(){
+        setCon.previous();
+        wrapAccounts();
+    }
+    
+    public void next(){
+        setCon.next();
+        wrapAccounts();
+    }
+    
+    public void wrapAccounts(){
+        List<Account> accList = setCon.getRecords();
+        accounts.clear();
+        
         if(!accList.isEmpty()){
             for(Account a : accList){
-                accWrapList.add(new AccountWrapper(a));
+                accounts.add(new AccountWrapper(a));
             }                
+        } 
+    }
+    
+    public PageReference createContact(){
+        for(AccountWrapper aw : accounts){
+            if(aw.isSelected){
+                selectedId = aw.acc.Id;
+            }
         }
-       
-        return accWrapList;
+        
+        PageReference pr = Page.CreateContact;
+        pr.getParameters().put('accountid', selectedId);
+        pr.setRedirect(true);
+        return pr;
     }
 }
