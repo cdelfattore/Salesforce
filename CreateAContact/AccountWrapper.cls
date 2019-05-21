@@ -1,6 +1,6 @@
 public class AccountWrapper {
 
-    public Boolean isChecked {get;set;}
+    public Boolean isSelected {get;set;}
     public Account acc {get;set;}
     
     public AccountWrapper(Account a){
