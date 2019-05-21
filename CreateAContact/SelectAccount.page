@@ -1,0 +1,29 @@
+<apex:page id="pg" controller="AccountListWithCheckBoxes">
+    <apex:form id="form">
+        <apex:pageBlock id="pgBlk" title="Select an Account">
+            <apex:pageBlockTable id="pgBlkTbl" value="{!accounts}" var="a" rows="5">
+                 <apex:column width="3%">
+                    <apex:inputCheckbox styleClass="chkBx" value="{!a.isSelected}" onclick="onChkBxSel(this)"/>
+                 </apex:column>
+                 <apex:column styleClass="name" value="{!a.acc.Name}" />
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!previous}" rendered="{!hasPrevious}" value="Previous" id="preBtn"/>
+                <apex:commandButton action="{!next}" rendered="{!hasNext}" value="Next" id="nextBtn"/>
+                
+                <apex:commandButton action="{!createContact}" value="Create Contact" id="create" reRender="pgBlkSelectedAcc"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+        
+    <script>
+        /*Only allow on check box to be selected at a time.*/
+        function onChkBxSel(currChkBx){
+            var chkBxs = document.getElementsByClassName('chkBx');
+            for(var i = 0; i < chkBxs.length; i++){
+                chkBxs[i].checked = false;
+            }
+            currChkBx.checked = true;
+        }
+    </script>
+</apex:page>
